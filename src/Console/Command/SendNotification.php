@@ -45,5 +45,6 @@ class SendNotification extends Command
         } catch (NotificationNotFoundException $e) {
             $this->error(sprintf('Notification (%s) does not exist.', $notificationId));
         }
+        $this->info('Successfully sent a notification.');
     }
 }

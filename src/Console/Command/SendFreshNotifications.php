@@ -39,5 +39,6 @@ class SendFreshNotifications extends Command
     public function handle(): void
     {
         $this->handler->handle(new SendFreshNotificationsCommand);
+        $this->info('Tried to send fresh notifications (some might have failed).');
     }
 }

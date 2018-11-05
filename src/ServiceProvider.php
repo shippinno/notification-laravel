@@ -3,14 +3,10 @@ declare(strict_types=1);
 
 namespace Shippinno\Notification\Laravel;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Shippinno\Notification\Domain\Model\DestinationRegistry;
 use Shippinno\Notification\Domain\Model\GatewayRegistry;
-use Shippinno\Notification\Domain\Model\Notification;
-use Shippinno\Notification\Domain\Model\NotificationRepository;
 use Shippinno\Notification\Domain\Model\SendNotification;
 use Shippinno\Notification\Domain\Model\TemplateNotificationFactory;
-use Shippinno\Notification\Infrastructure\Domain\Model\DoctrineNotificationRepository;
 use Shippinno\Notification\Laravel\Console\Command\SendFreshNotifications;
 use Shippinno\Notification\Laravel\Console\Command\SendNotification as SendNotificationCommand;
 
@@ -62,15 +58,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app->singleton(SendNotification::class, function () {
             return new SendNotification($this->app->make(GatewayRegistry::class));
-        });
-
-        $this->app->singleton(NotificationRepository::class, function () {
-            $entityManager = $this->app->make(ManagerRegistry::class)->getManager('notifications');
-            return new DoctrineNotificationRepository(
-                $entityManager,
-                $entityManager->getClassMetadata(Notification::class),
-                true
-            );
         });
     }
 
