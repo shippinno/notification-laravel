@@ -39,7 +39,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            $this->configPath(), 'notification'
+            $this->configPath(), 'notificationdo'
         );
 
         $this->app->singleton(DestinationRegistry::class, function () {
@@ -79,6 +79,6 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     private function configPath(): string
     {
-        return __DIR__ . '/../config/doctrine.php';
+        return __DIR__ . '/../config/notification.php';
     }
 }
