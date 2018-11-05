@@ -44,23 +44,23 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
         $this->app->singleton(DestinationRegistry::class, function () {
             $destinationRegistry = new DestinationRegistry;
-            $destinationRegistry->setAll($this->app->make('config')->get('notification.destinations'));
+            $destinationRegistry->setAll($this->app->make('config')->get('notification.destinations', []));
             return $destinationRegistry;
         });
 
         $this->app->singleton(GatewayRegistry::class, function () {
             $gatewayRegistry = new GatewayRegistry;
-            $gatewayRegistry->setAll($this->app->make('config')->get('notification.gateways'));
+            $gatewayRegistry->setAll($this->app->make('config')->get('notification.gateways', []));
             return $gatewayRegistry;
         });
 
-        $this->app->singleton(TemplateNotificationFactory::class, function () {
-            return new TemplateNotificationFactory($this->app->make('config')->get('notification.template'));
-        });
+        if (!is_null($this->app->make('config')->get('notification.template', null))) {
+            $this->app->singleton(TemplateNotificationFactory::class, function () {
+                return new TemplateNotificationFactory($this->app->make('config')->get('notification.template'));
+            });
+        }
 
-        $this->app->singleton(SendNotification::class, function () {
-            $gatewayRegistry = new GatewayRegistry;
-            $gatewayRegistry->setAll($this->app->make('config')->get('notification.gateways'));
+        $this->app->singleton(SendNotification::class, function ($gatewayRegistry) {
             return new SendNotification($gatewayRegistry);
         });
 
