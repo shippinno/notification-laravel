@@ -22,7 +22,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/notification.php' => config_path('notification.php')
+            $this->configPath() => config_path('notification.php')
         ], 'config');
 
         if ($this->app->runningInConsole()) {
@@ -38,6 +38,10 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function register(): void
     {
+        $this->mergeConfigFrom(
+            $this->configPath(), 'notification'
+        );
+
         $this->app->singleton(DestinationRegistry::class, function () {
             $destinationRegistry = new DestinationRegistry;
             $destinationRegistry->setAll($this->app->make('config')->get('notification.destinations'));
@@ -68,5 +72,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
                 true
             );
         });
+    }
+
+    /**
+     * @return string
+     */
+    private function configPath(): string
+    {
+        return __DIR__ . '/../config/doctrine.php';
     }
 }
