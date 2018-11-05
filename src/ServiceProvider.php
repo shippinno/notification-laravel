@@ -60,8 +60,8 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
             });
         }
 
-        $this->app->singleton(SendNotification::class, function ($gatewayRegistry) {
-            return new SendNotification($gatewayRegistry);
+        $this->app->singleton(SendNotification::class, function () use {
+            return new SendNotification($this->app->make(GatewayRegistry::class));
         });
 
         $this->app->singleton(NotificationRepository::class, function () {
