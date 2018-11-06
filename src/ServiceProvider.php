@@ -39,13 +39,13 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
         );
 
         $this->app->singleton(DestinationRegistry::class, function () {
-            $destinationRegistry = DestinationRegistry::instance();
+            $destinationRegistry = new DestinationRegistry;
             $destinationRegistry->setAll($this->app->make('config')->get('notification.destinations', []));
             return $destinationRegistry;
         });
 
         $this->app->singleton(GatewayRegistry::class, function () {
-            $gatewayRegistry = GatewayRegistry::instance();
+            $gatewayRegistry = new GatewayRegistry;
             $gatewayRegistry->setAll($this->app->make('config')->get('notification.gateways', []));
             return $gatewayRegistry;
         });
