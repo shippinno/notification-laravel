@@ -14,10 +14,10 @@ use Tanigami\ValueObjects\Web\EmailAddress;
 return [
     'destinations' => [
         'defaultEmail' => new EmailDestination(
-            [new EmailAddress(env('NOTIFICATION_EMAIL_FROM'))]
+            [new EmailAddress(env('NOTIFICATION_EMAIL_TO', 'to@example.com'))]
         ),
         'defaultSlackChannel' => new SlackChannelDestination(
-            env('NOTIFICATION_SLACK_CHANNEL')
+            env('NOTIFICATION_SLACK_CHANNEL', 'channel')
         ),
     ],
     'gateways' => [
@@ -25,18 +25,17 @@ return [
             new SwiftMailerSendEmail(
                 new Swift_Mailer(
                     (new Swift_SmtpTransport(
-                        env('MAIL_HOST'),
-                        env('MAIL_PORT'),
-                        env('MAIL_ENCRYPTION'
-                        )))
-                        ->setUsername(env('MAIL_USERNAME'))
-                        ->setPassword(env('MAIL_PASSWORD'))
+                        env('MAIL_HOST', 'example.com'),
+                        env('MAIL_PORT', 25),
+                        env('MAIL_ENCRYPTION', null)))
+                        ->setUsername(env('MAIL_USERNAME', 'username'))
+                        ->setPassword(env('MAIL_PASSWORD', 'password'))
                 ),
                 true
             ),
-            new EmailAddress(env('NOTIFICATION_EMAIL_FROM'))
+            new EmailAddress(env('NOTIFICATION_EMAIL_FROM', 'from@example.com'))
         ),
-        'SlackChannelDestination' => new SlackGateway(new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL')))
+        'SlackChannelDestination' => new SlackGateway(new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL', 'https://example.com')))
     ],
-    'template' => new Liquid(new Filesystem(new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY'))))),
+    'template' => new Liquid(new Filesystem(new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', ''))))),
 ];
