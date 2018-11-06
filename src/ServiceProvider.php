@@ -35,17 +35,17 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            $this->configPath(), 'notificationdo'
+            $this->configPath(), 'notification'
         );
 
         $this->app->singleton(DestinationRegistry::class, function () {
-            $destinationRegistry = new DestinationRegistry;
+            $destinationRegistry = DestinationRegistry::instance();
             $destinationRegistry->setAll($this->app->make('config')->get('notification.destinations', []));
             return $destinationRegistry;
         });
 
         $this->app->singleton(GatewayRegistry::class, function () {
-            $gatewayRegistry = new GatewayRegistry;
+            $gatewayRegistry = GatewayRegistry::instance();
             $gatewayRegistry->setAll($this->app->make('config')->get('notification.gateways', []));
             return $gatewayRegistry;
         });
