@@ -6,6 +6,7 @@ namespace Shippinno\Notification\Laravel\Console\Command;
 use Illuminate\Console\Command;
 use Shippinno\Notification\Application\Command\SendFreshNotifications as SendFreshNotificationsCommand;
 use Shippinno\Notification\Application\Command\SendFreshNotificationsHandler;
+use Tanigami\Specification\Specification;
 
 class SendFreshNotifications extends Command
 {
@@ -38,15 +39,15 @@ class SendFreshNotifications extends Command
      */
     public function handle(): void
     {
-        $this->handler->handle(new SendFreshNotificationsCommand($this->metadataSpecs()));
+        $this->handler->handle(new SendFreshNotificationsCommand($this->specification()));
         $this->info('Tried to send fresh notifications (some might have failed).');
     }
 
     /**
-     * @return array
+     * @return null|Specification
      */
-    public function metadataSpecs(): array
+    public function specification(): ?Specification
     {
-        return [];
+        return null;
     }
 }
