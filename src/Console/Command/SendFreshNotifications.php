@@ -22,7 +22,7 @@ class SendFreshNotifications extends Command
     /**
      * @var SendFreshNotificationsHandler
      */
-    private $handler;
+    protected $handler;
 
     /**
      * @param SendFreshNotificationsHandler $handler
@@ -38,7 +38,15 @@ class SendFreshNotifications extends Command
      */
     public function handle(): void
     {
-        $this->handler->handle(new SendFreshNotificationsCommand);
+        $this->handler->handle(new SendFreshNotificationsCommand($this->metadataSpecs()));
         $this->info('Tried to send fresh notifications (some might have failed).');
+    }
+
+    /**
+     * @return array
+     */
+    public function metadataSpecs(): array
+    {
+        return [];
     }
 }
