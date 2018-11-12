@@ -46,7 +46,7 @@ class SendFreshNotifications extends Command
     /**
      * @return null|Specification
      */
-    public function specification(): ?Specification
+    protected function specification(): ?Specification
     {
         return null;
     }
