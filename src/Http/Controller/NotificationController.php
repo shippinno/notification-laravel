@@ -60,7 +60,7 @@ class NotificationController extends Controller
         try {
             $notification = $handler->handle(new FetchNotification($notificationId));
         } catch (NotificationNotFoundException $e) {
-            throw new NotFoundException('Notification not found.')
+            throw new NotFoundException('Notification not found.');
         }
 
         return new JsonResponse($notification, 200);
