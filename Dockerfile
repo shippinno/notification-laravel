@@ -1,13 +1,13 @@
-FROM php:7.3-fpm-alpine
+FROM php:7.4-fpm-alpine
 
-RUN apk update && \
-    apk add --no-cache git mysql-client curl libmcrypt libmcrypt-dev openssh-client \
-    libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf nodejs python2 sqlite-dev && \
-    apk --update add tzdata && \
-    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
-    apk del tzdata && \
-    rm -rf /tmp/src && \
-    rm -rf /var/cache/apk/*
+#RUN apk update && \
+#    apk add --no-cache git mysql-client curl libmcrypt libmcrypt-dev openssh-client \
+#    libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf nodejs python2 sqlite-dev && \
+#    apk --update add tzdata && \
+#    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
+#    apk del tzdata && \
+#    rm -rf /tmp/src && \
+#    rm -rf /var/cache/apk/*
 
 #RUN apk add \
 #    --repository http://dl-cdn.alpinelinux.org/alpine/v3.6/main \
@@ -20,16 +20,16 @@ RUN apk update && \
 #RUN pecl install xdebug
 #RUN docker-php-ext-enable xdebug
 #RUN docker-php-ext-enable amqp
-RUN docker-php-ext-install \
+#RUN docker-php-ext-install \
 #    pdo_mysql \
 #    mysqli \
-    mbstring \
-    pcntl
+#    mbstring \
+#    pcntl
 
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer
 
-RUN echo "memory_limit = 1024M" > /usr/local/etc/php/conf.d/memory_limit.ini
+#RUN echo "memory_limit = 1024M" > /usr/local/etc/php/conf.d/memory_limit.ini
 
 # COPY ./auth.json /root/.composer/auth.json
 
