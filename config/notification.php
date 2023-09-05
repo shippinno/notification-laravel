@@ -38,7 +38,7 @@ return [
     ],
     'template' => new Liquid(
         new Filesystem(
-            new LocalFilesystemAdapter(env('NOTIFICATION_TEMPLATE_DIRECTORY', ''))
+            new LocalFilesystemAdapter(__DIR__.env('NOTIFICATION_TEMPLATE_DIRECTORY', ''))
         )
     ),
 ];
