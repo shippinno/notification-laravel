@@ -11,7 +11,12 @@
             "type": "vcs",
             "url": "git@github.com:shippinno/email.git",
             "no-api": true
-          }
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:shippinno/template-php.git",
+            "no-api": true
+        }
       ],
     "require": {
         "php": "^8.2",
@@ -19,7 +24,8 @@
         "illuminate/routing": "^10.0||^11.0",
         "illuminate/support": "^10.0||^11.0",
         "shippinno/notification": "dev-feature/php-version-up",
-        "shippinno/email": "dev-feature/php-version-up"
+        "shippinno/email": "dev-feature/php-version-up",
+        "shippinno/template": "dev-feature/php-version-up"
     },
     "autoload": {
         "psr-4": {
