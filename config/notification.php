@@ -2,7 +2,6 @@
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use Maknz\Slack\Client;
 use Shippinno\Email\SwiftMailer\SwiftMailerSendEmail;
 use Shippinno\Notification\Domain\Model\EmailDestination;
@@ -36,9 +35,11 @@ return [
             new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL', 'https://example.com'))
         ),
     ],
-    'template' => new Liquid(
-        new Filesystem(
-            new LocalFilesystemAdapter(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
-        )
-    ),
+    // バージョンアップさせるために一旦コメントアウトしてエラー回避
+    // 'template' => new Liquid(
+    //     new Filesystem(
+    //         new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
+    //     )
+    // ),
+    'template' => '',
 ];
