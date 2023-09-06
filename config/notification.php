@@ -2,6 +2,7 @@
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
+use League\Flysystem\Local\LocalFilesystemAdapter;
 use Maknz\Slack\Client;
 use Shippinno\Email\SwiftMailer\SwiftMailerSendEmail;
 use Shippinno\Notification\Domain\Model\EmailDestination;
@@ -37,7 +38,7 @@ return [
     ],
     'template' => new Liquid(
         new Filesystem(
-            new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
+            new LocalFilesystemAdapter(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
         )
     ),
 ];
