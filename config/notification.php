@@ -1,7 +1,6 @@
 <?php
 
 use League\Flysystem\Adapter\Local;
-use League\Flysystem\Local\LocalFilesystemAdapter;
 use League\Flysystem\Filesystem;
 use Maknz\Slack\Client;
 use Shippinno\Email\SwiftMailer\SwiftMailerSendEmail;
@@ -38,7 +37,7 @@ return [
     ],
     'template' => new Liquid(
         new Filesystem(
-            new LocalFilesystemAdapter(__DIR__.env('NOTIFICATION_TEMPLATE_DIRECTORY', ''))
+            new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
         )
     ),
 ];
