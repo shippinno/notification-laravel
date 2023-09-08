@@ -15,6 +15,7 @@ return [
     'destinations' => [
         // DestinationRegistry entries
     ],
+    'gateways' => [],
 //    'gateways' => [
 //        // GatewayRegistry entries
 //        'EmailDestination' => new EmailGateway(
