@@ -15,26 +15,26 @@ return [
     'destinations' => [
         // DestinationRegistry entries
     ],
-    'gateways' => [
-        // GatewayRegistry entries
-        'EmailDestination' => new EmailGateway(
-            new SwiftMailerSendEmail(
-                new Swift_Mailer(
-                    (new Swift_SmtpTransport(
-                        env('MAIL_HOST', 'example.com'),
-                        env('MAIL_PORT', 25),
-                        env('MAIL_ENCRYPTION', null)))
-                        ->setUsername(env('MAIL_USERNAME', 'username'))
-                        ->setPassword(env('MAIL_PASSWORD', 'password'))
-                ),
-                false
-            ),
-            new EmailAddress(env('NOTIFICATION_EMAIL_FROM', 'from@example.com'))
-        ),
-        'SlackChannelDestination' => new SlackGateway(
-            new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL', 'https://example.com'))
-        ),
-    ],
+//    'gateways' => [
+//        // GatewayRegistry entries
+//        'EmailDestination' => new EmailGateway(
+//            new SwiftMailerSendEmail(
+//                new Swift_Mailer(
+//                    (new Swift_SmtpTransport(
+//                        env('MAIL_HOST', 'example.com'),
+//                        env('MAIL_PORT', 25),
+//                        env('MAIL_ENCRYPTION', null)))
+//                        ->setUsername(env('MAIL_USERNAME', 'username'))
+//                        ->setPassword(env('MAIL_PASSWORD', 'password'))
+//                ),
+//                false
+//            ),
+//            new EmailAddress(env('NOTIFICATION_EMAIL_FROM', 'from@example.com'))
+//        ),
+//        'SlackChannelDestination' => new SlackGateway(
+//            new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL', 'https://example.com'))
+//        ),
+//    ],
     // バージョンアップさせるために一旦コメントアウトしてエラー回避
     // 'template' => new Liquid(
     //     new Filesystem(
