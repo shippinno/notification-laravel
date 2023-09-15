@@ -3,14 +3,15 @@
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
 use Maknz\Slack\Client;
-use Shippinno\Email\Symfony\SymfonyMailerSendEmail;
+use Shippinno\Email\SymfonyMailer\SymfonyMailerSendEmail;
 use Shippinno\Notification\Domain\Model\EmailDestination;
 use Shippinno\Notification\Domain\Model\SlackChannelDestination;
 use Shippinno\Notification\Infrastructure\Domain\Model\EmailGateway;
 use Shippinno\Notification\Infrastructure\Domain\Model\SlackGateway;
 use Shippinno\Template\Liquid;
-use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 use Tanigami\ValueObjects\Web\EmailAddress;
+use Symfony\Component\Mailer\Mailer;
+use Symfony\Component\Mailer\Transport\Smtp\SmtpTransport;
 
 return [
     'destinations' => [
@@ -21,7 +22,7 @@ return [
         'EmailDestination' => new EmailGateway(
             new SymfonyMailerSendEmail(
                 new Mailer(
-                    (new EsmtpTransport(
+                    (new SmtpTransport(
                         env('MAIL_HOST', 'example.com'),
                         env('MAIL_PORT', 25),
                         env('MAIL_ENCRYPTION', null)))
