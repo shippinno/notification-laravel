@@ -22,16 +22,11 @@ return [
         'EmailDestination' => new EmailGateway(
             new SymfonyMailerSendEmail(
                 new Mailer(
-                    (new SmtpTransport(
-                        env('MAIL_HOST', 'example.com'),
-                        env('MAIL_PORT', 25),
-                        env('MAIL_ENCRYPTION', null)))
+                    (new SmtpTransport(null, null, null)),
+                    null,
+                    null
                 ),
-                false,
-                null
-            ),
-            new EmailAddress(env('NOTIFICATION_EMAIL_FROM', 'from@example.com'))
-        ),
+        ), new EmailAddress(env('NOTIFICATION_EMAIL_FROM', 'from@example.com'))),
         'SlackChannelDestination' => new SlackGateway(
             new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL', 'https://example.com'))
         ),
