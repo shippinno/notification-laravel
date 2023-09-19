@@ -25,7 +25,7 @@
         "illuminate/support": "^8.0",
         "shippinno/notification": "dev-feature/symfony-mailer",
         "shippinno/email": "dev-feature/php-version-up",
-        "shippinno/template": "1.0"
+        "shippinno/template": "^1.0"
     },
     "autoload": {
         "psr-4": {
