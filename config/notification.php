@@ -31,10 +31,10 @@ return [
             new Client(env('NOTIFICATION_SLACK_WEBHOOK_URL', 'https://example.com'))
         ),
     ],
-    'template' => new Liquid(
-        new Filesystem(
-            new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
-        )
-    ),
-    // 'template' => '',
+    // 'template' => new Liquid(
+    //     new Filesystem(
+    //         new Local(base_path(env('NOTIFICATION_TEMPLATE_DIRECTORY', '')))
+    //     )
+    // ),
+    'template' => '',
 ];
